@@ -1,0 +1,16 @@
+<%- include("../partials/header"); %>
+
+<div class="row">
+	<div class="col-md-12">
+		<h1>Notifications</h1>
+		<ul>
+		<% allNotifications.forEach(function(noti){ %>
+			<li><a href="/notifications/<%= noti._id%>"><%= noti.username %> created a campground</a></li>
+		<% })%>
+		</ul>
+	</div>
+</div>
+
+
+
+<%- include("../partials/footer") %>

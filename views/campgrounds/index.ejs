@@ -1,0 +1,55 @@
+<%- include("../partials/header") %>
+
+
+	<header class="container">
+		<div class="jumbotron">
+				<h1><span class="glyphicon glyphicon-tent"></span>Welcome to YelpCamp</h1>
+				<p>View our hand-picked camp ground.</p>
+				<p>
+					<a class="btn btn-lg btn-primary" href="campgrounds/new">Add a New Camp Ground</a>
+				</p>
+				<p>
+					<form action="/campgrounds" method="GET" class="form-inline">
+						<div class="form-group">
+							<input type="text" name="search" placeholder="Camground search..." class="form-control">
+							<input type="submit" value="search" class="btn btn-default form-control">
+						</div>				
+					</form>	
+				</p>
+		</div>	
+	
+	
+		
+			<div class="row text-center" style="display:flex; flex-wrap:wrap">
+			<% campgrounds.forEach(function(camp) {  %>
+				<div class="col-sm-6 col-lg-3">	
+					<div class="thumbnail">
+						<img src="<%= camp.image %>">
+						<div class="caption">
+							<h4><%= camp.name %></h4>
+						</div>
+						<div>
+							<% if(camp.rating === 0) { %>
+							<p><em> No reviews yet.</em></p>	
+							<% } else { %>
+							<p>
+								<%-'<span class="fa fa-star checked"></span>'.repeat(camp.rating) %>
+							    <%-'<span class="fa fa-star"></span>'.repeat(5-camp.rating) %>
+								</p>
+							<% } %>
+						</div>
+						<p>
+							<a href ="/campgrounds/<%= camp._id %>" class="btn btn-primary">More Info</a>
+						</p>
+					</div>
+				</div>
+			<% }) %>	
+			</div>
+
+		</header>		
+
+
+
+
+
+<%- include("../partials/footer") %>
