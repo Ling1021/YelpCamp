@@ -14,7 +14,9 @@ const   express    = require("express"),
 	 	methodOverride = require("method-override"),
 		User       = require("./modules/user"),
 	  	flash      = require("connect-flash"),
-	  	notification = require("./modules/notification");
+	  	notification = require("./modules/notification"),
+	   session = require("express-session");
+const mongoStore = require('connect-mongo')(session);
 
 
 //REQUIRING ROUTES
@@ -36,10 +38,14 @@ app.use(flash());
 app.locals.moment = require('moment');
 
 //PASSPORT CONFIGURATION
-app.use(require("express-session")({
-	secret:"Once again Rusty wins cutest dog!",//used to encoded and uncoded the info
+app.use(session({
+	secret:"lkejl;iJLIEJlleijfjksladldkfj",//used to encoded and uncoded the info
 	resave:false,
-	saveUninitialized:false
+	saveUninitialized:false,
+	store: new mongoStore({
+        url: 'mongodb://localhost/yelp_camp',
+        touchAfter: 24 * 3600,// time period in seconds
+    })
 }));
 
 app.use(passport.initialize());
