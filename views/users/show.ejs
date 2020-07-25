@@ -7,7 +7,7 @@
 			<img class="card-img-top" src="<%= user.avatar %>" alt="user profile image">
 			</div>
 			 <div class="card-body">
-				<h5 class="card-title" id="username"><%= user.firstName + " " + user.lastName %></h5>
+				<h1 class="card-title" id="username"><%= user.firstName + " " + user.lastName %></h1>
 				 <% if(currentUser && currentUser.id !== user.id){ %>
 					<form action="/follow/<%= user.id %>" method="GET" id="follow">
 						<input class="btn btn-xs btn-primary" type="submit" value="Follow">
