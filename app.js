@@ -25,8 +25,8 @@ const commentRoutes = require("./routes/comments"),
 	authRoutes = require("./routes/index"),
 	  reviewRoutes = require("./routes/review");
 	
-
-mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true , useUnifiedTopology: true });
+const url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp"
+mongoose.connect(url, { useNewUrlParser: true , useUnifiedTopology: true });
 
 app.use(bodyParser.urlencoded({extended:true}));		  
 app.set("view engine", 'ejs');
