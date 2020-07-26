@@ -26,7 +26,11 @@ const commentRoutes = require("./routes/comments"),
 	  reviewRoutes = require("./routes/review");
 	
 const url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp"
-mongoose.connect(url, { useNewUrlParser: true , useUnifiedTopology: true });
+mongoose.connect(url, { useNewUrlParser: true , useUnifiedTopology: true }).then(() => {
+	console.log("Connected to DB!");
+}).catch(err => {
+	console.log("Error", err.message);
+})
 
 app.use(bodyParser.urlencoded({extended:true}));		  
 app.set("view engine", 'ejs');
@@ -74,6 +78,6 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
 //SERVER
-app.listen(3000, function(){
+app.listen(process.env.PORT, function(){
 	console.log("The YelCamp Server is listening!");
 });
