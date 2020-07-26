@@ -1,7 +1,5 @@
 require('dotenv').config();
 
-
-
 const   express    = require("express"),
 		app        = express(),
 		bodyParser = require("body-parser"),
@@ -25,8 +23,8 @@ const commentRoutes = require("./routes/comments"),
 	authRoutes = require("./routes/index"),
 	  reviewRoutes = require("./routes/review");
 	
-//const url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp"
-mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true , useUnifiedTopology: true }).then(() => {
+const url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp"
+mongoose.connect(url, { useNewUrlParser: true , useUnifiedTopology: true }).then(() => {
 	console.log("Connected to DB!");
 }).catch(err => {
 	console.log("Error", err.message);
@@ -46,7 +44,7 @@ app.use(session({
 	resave:false,
 	saveUninitialized:false,
 	store: new mongoStore({
-        url: 'mongodb://localhost/yelp_camp',
+        url: url,
         touchAfter: 24 * 3600,// time period in seconds
     })
 }));
