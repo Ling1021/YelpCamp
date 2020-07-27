@@ -39,7 +39,7 @@ router.post("/", middleware.isLoggedin, function(req,res){
 					campground.save();
 					//redirect to campground show page
 					req.flash("success","Comment added successfully.")
-					res.redirect("/campgrounds/" + campground._id);
+					res.redirect("/campgrounds/" + campground._id + "/#comment" );
 				}
 			})
 		}
@@ -71,9 +71,11 @@ router.get("/:comment_id/edit", middleware.isLoggedin, function(req,res){
 });
 
 //UPDATE ROUTE
-router.put("/:comment_id", middleware.checkCommentOwnership, function(req,res){
+router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
 	//lookUp campground using ID
+	
 	Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err,updatedComment){
+		eval(require('locus'))
 		if(err){
 			console.log(err);
 			res.redirect("back");

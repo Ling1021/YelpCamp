@@ -15,7 +15,11 @@ background: linear-gradient(to bottom, #2C5364, #203A43, #0F2027); /* W3C, IE 10
 	width:100%;
 }
 
-h1{
+h1 {
+	color:white;
+}
+
+label{
 	color:white;
 }
 
@@ -65,4 +69,7 @@ h1{
 
 #delete-btn {
 	display:inline;
+}
+.well {
+	margin-bottom:0;
 }

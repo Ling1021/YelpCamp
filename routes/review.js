@@ -48,7 +48,7 @@ router.post("/", middleware.isLoggedin, middleware.checkReviewExistence, async f
 		camp.rating = calculateAverage(camp.reviews);
 		camp.save();
 		req.flash("success","Your review has been successfully added.")
-		res.redirect("/campgrounds/" + camp._id);
+		res.redirect("/campgrounds/" + camp._id + "/#rating");
 	} catch(err) {
 		req.flash("error", err.message);
 		res.redirect("back");
