@@ -21,39 +21,28 @@ const data = [{
 
 
 
-function seedDB(){
-	Campground.remove({}, function(err){
-		if(err){
-			console.log(err);
-		} else {
-			console.log("removed campground!");
-			data.forEach(function(seed){
-			Campground.create(seed, function(err, campground){
-				if(err){
-					console.log(err);
-				} else {
-					console.log("added a campground");
-					//create comments
-					Comment.create(
+async function seedDB(){
+	try {
+		await Campground.remove({});
+	await Comment.remove({});
+	
+	for (const seed of data) {
+		let campground = await Campground.create(seed); 
+		//create comments
+		let comment =  await Comment.create(
 						{
 						   text:"This place is great, but I wish there was internet",
 							author:"Homer"
-						}, function(err, comment){
-						if(err){
-							console.log(err);
-						} else {
-							campground.comments.push(comment);
-							campground.save();
-							console.log("created a comment");
-						}
-					}
-				)}
-			} )
-		})
+						} 
+		)
+		campground.comments.push(comment);
+		campground.save();
+		console.log("created a comment");
 		}
-		
-	})
-}
+	}catch(err){
+		console.log(err)
+	}
+};
 
 
 module.exports = seedDB;
