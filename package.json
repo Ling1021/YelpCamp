@@ -27,7 +27,7 @@
     "node": "^14.5.0",
     "node-geocoder": "^3.27.0",
     "nodemailer": "^6.4.10",
-    "passport": "^0.4.1",
+    "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
     "stripe": "^8.74.0"
